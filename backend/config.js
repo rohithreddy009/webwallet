@@ -1,9 +1,4 @@
-// const config = {
-//     JWT_SECRET: 'realmadrid' 
-// };
-
-// module.exports = config;
-
-const JWT_SECRET = "realmadrid"
-
-module.exports = JWT_SECRET
+//backend/config.js
+module.exports = {
+	JWT_SECRET: "your-jwt-secret"
+}

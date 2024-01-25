@@ -1,12 +1,9 @@
+// backend/db.js
 const mongoose = require('mongoose');
 
-// Replace this with your MongoDB connection string
-const mongoURI = 'mongodb+srv://mongodbpractice:123Rohith@cluster0.pvtjavj.mongodb.net/paytm_wallet'; 
+mongoose.connect("mongodb+srv://mongodbpractice:123Rohith@cluster0.pvtjavj.mongodb.net/paytm_wallet")
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log('MongoDB connection established'))
-    .catch(err => console.error('MongoDB connection error:', err));
-
+// Create a Schema for Users
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
@@ -36,7 +33,22 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+const accountSchema = new mongoose.Schema({
+    userId: {
+        type: mongoose.Schema.Types.ObjectId, // Reference to User model
+        ref: 'User',
+        required: true
+    },
+    balance: {
+        type: Number,
+        required: true
+    }
+});
+
+const Account = mongoose.model('Account', accountSchema);
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
-
+module.exports = {
+	User,
+    Account
+};

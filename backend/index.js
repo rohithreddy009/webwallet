@@ -1,15 +1,13 @@
+// backend/index.js
 const express = require('express');
+const cors = require("cors");
+const rootRouter = require("./routes/index");
+
 const app = express();
-const userRouter = require('./routes/index');
-const cors = require('cors');
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
 
+app.use("/api/v1", rootRouter);
 
-// Other middlewares and routes...
-
-// Use apiRouter for all routes starting with /api/v1
-app.use('/api/v1', userRouter);
-
-app.listen(3000)
+app.listen(3000);
