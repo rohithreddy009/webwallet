@@ -1,6 +1,8 @@
 
 ## Web2 wallet
 
+SignUp here: https://web2wallet.rohithreddy.site/signup
+
 React for Frontend  
 
 Tailwind for styling
