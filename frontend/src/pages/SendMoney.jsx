@@ -42,7 +42,7 @@ export const SendMoney = () => {
                     />
                     </div>
                     <button onClick={() => {
-                        axios.post("https://web2-wallet-backend.onrender.com/api/v1/account/transfer", {
+                        axios.post("http://localhost:3000/api/v1/account/transfer", {
                             to: id,
                             amount
                         }, {

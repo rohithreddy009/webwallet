@@ -98,47 +98,22 @@ const updateBody = zod.object({
     lastName: zod.string().optional(),
 })
 
-// router.put("/", authMiddleware, async (req, res) => {
-//     const { success } = updateBody.safeParse(req.body)
-//     if (!success) {
-//         res.status(411).json({
-//             message: "Error while updating information"
-//         })
-//     }
-
-//     await User.updateOne(req.body, {
-//         id: req.userId
-//     })
-
-//     res.json({
-//         message: "Updated successfully"
-//     })
-// })
-
 router.put("/", authMiddleware, async (req, res) => {
-    const { success } = updateBody.safeParse(req.body);
+    const { success } = updateBody.safeParse(req.body)
     if (!success) {
-        return res.status(411).json({
+        res.status(411).json({
             message: "Error while updating information"
-        });
+        })
     }
 
-    const updateResult = await User.updateOne(
-        { _id: req.userId }, // Filter to find the document
-        { $set: req.body }  // Update operation
-    );
+    await User.updateOne(req.body, {
+        id: req.userId
+    })
 
-    if (updateResult.matchedCount === 0) {
-        return res.status(404).json({ message: "User not found" });
-    }
-
-    if (updateResult.modifiedCount === 0) {
-        return res.status(400).json({ message: "No changes were made" });
-    }
-
-    res.json({ message: "Updated successfully" });
-});
-
+    res.json({
+        message: "Updated successfully"
+    })
+})
 
 router.get("/bulk", async (req, res) => {
     const filter = req.query.filter || "";

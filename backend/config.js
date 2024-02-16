@@ -1,4 +1,4 @@
 //backend/config.js
 module.exports = {
-	JWT_SECRET: "realmadrid"
+	JWT_SECRET: "your-jwt-secret"
 }
