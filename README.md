@@ -20,5 +20,5 @@ Web2 Wallet
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/rohithreddy009)
+- [@rohtihreddy](https://www.github.com/rohithreddy009)
 
