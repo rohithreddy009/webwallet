@@ -1,11 +1,27 @@
 {
-    "github": {
-        "silent": true
-    },
+    "version": 2,
+    "builds": [
+        {
+            "src": "backend/index.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "frontend/package.json",
+            "use": "@vercel/static-build"
+        }
+    ],
     "rewrites": [
         {
+            "source": "/api/v1/(.*)",
+            "destination": "/backend/index.js"
+        },
+        {
             "source": "/(.*)",
-            "destination": "/"
+            "destination": "/frontend/$1"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/frontend/index.html"
         }
     ]
 }
