@@ -1,12 +1,13 @@
-import { useSearchParams } from 'react-router-dom';
-import axios from "axios";
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import axios from "axios";
 
 export const SendMoney = () => {
     const [searchParams] = useSearchParams();
     const id = searchParams.get("id");
     const name = searchParams.get("name");
     const [amount, setAmount] = useState(0);
+    const navigate = useNavigate();
 
     return <div class="flex justify-center h-screen bg-gray-100">
         <div className="h-full flex flex-col justify-center">
@@ -41,20 +42,34 @@ export const SendMoney = () => {
                         placeholder="Enter amount"
                     />
                     </div>
-                    <button onClick={() => {
-                        axios.post("https://wallet-archived-backend.vercel.app/api/v1/account/transfer", {
-                            to: id,
-                            amount
-                        }, {
-                            headers: {
-                                Authorization: "Bearer " + localStorage.getItem("token")
+                    <button onClick={async () => {
+                        try {
+                            const response = await axios.post("https://wallet-archived-backend.vercel.app/api/v1/account/transfer", {
+                                to: id,
+                                amount
+                            }, {
+                                headers: {
+                                    Authorization: "Bearer " + localStorage.getItem("token")
+                                }
+                            });
+                            // Assuming the API returns a success status for a successful transfer
+                            if (response.status === 200) {
+                                alert("Transfer successful!");
+                                navigate("/dashboard");
+                            } else {
+                                // Handle any responses indicating the transfer was not successful
+                                alert("Transfer failed. Please try again.");
                             }
-                        })
+                        } catch (error) {
+                            console.error("Transfer error:", error);
+                            // This catches any network errors or cases where the server response code indicates failure
+                            alert("Transfer failed. Please check your internet connection and try again.");
+                        }
                     }} class="justify-center rounded-md text-sm font-medium ring-offset-background transition-colors h-10 px-4 py-2 w-full bg-green-500 text-white">
                         Initiate Transfer
                     </button>
                 </div>
-                </div>
+            </div>
         </div>
       </div>
     </div>
