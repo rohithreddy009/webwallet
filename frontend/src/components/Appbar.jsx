@@ -7,7 +7,7 @@ export const Appbar = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("token"); // Clear the token
-        localStorage.removeItem("userName"); // Also clear the user's name
+        localStorage.removeItem("name"); // Also clear the user's name
         navigate("/signin"); // Redirect to the signin page
     };
 
@@ -18,10 +18,10 @@ export const Appbar = () => {
             </div>
             <div className="flex items-center">
                 <div>
-                    Hello, {userName} {/* Display the user's name */}
+                    Hello, {userName} 
                 </div>
                 <div className="rounded-full h-12 w-12 bg-slate-200 flex justify-center items-center mx-2 text-xl">
-                    {userName.charAt(0)} {/* Display the first letter of the user's name */}
+                    {userName.charAt(0)} 
                 </div>
                 <button 
                     onClick={handleLogout} 
@@ -33,3 +33,4 @@ export const Appbar = () => {
         </div>
     );
 };
+

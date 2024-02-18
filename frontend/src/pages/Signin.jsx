@@ -24,13 +24,14 @@ export const Signin = () => {
                 password
             });
             localStorage.setItem("token", response.data.token); // Store the token
+            localStorage.setItem("name", username);
             navigate("/dashboard"); // Navigate to the dashboard upon successful signin
         } catch (error) {
             // Basic error handling
             if (error.response && error.response.status === 401) {
                 setError("Invalid credentials. Please try again."); // Set specific error message for invalid credentials
             } else {
-                setError("Failed to sign in. Please try again later."); // Generic error message for other errors
+                setError("You've entered invalid email or password, Try again !"); // Generic error message for other errors
             }
             setIsLoading(false); // Stop loading due to error
         }
