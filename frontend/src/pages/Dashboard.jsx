@@ -10,12 +10,12 @@ export const Dashboard = () => {
     useEffect(() => {
         const fetchBalance = async () => {
             try {
-                const token = localStorage.getItem('token'); // Retrieve the token
+                const token = localStorage.getItem('token');
                 if (!token) {
                     console.log('No token found, please log in');
                     return;
                 }
-                const response = await axios.get('https://wallet-archived-backend.vercel.app/api/v1/account/balance', { // Assuming your backend is hosted at the same domain
+                const response = await axios.get('https://wallet-archived-backend.vercel.app/api/v1/account/balance', { 
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -28,10 +28,10 @@ export const Dashboard = () => {
         };
 
         fetchBalance();
-    }, []); // Empty dependency array ensures this runs once on component mount
+    }, []);
 
     return (
-        <div>
+        <div className="bg-gradient-to-r from-black via-gray-800 to-black min-h-screen">
             <Appbar />
             <div className="m-8">
                 <Balance value={balance} />
