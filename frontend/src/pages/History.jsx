@@ -1,69 +1,9 @@
-// export const History = () => {
-//     return <div>
-//         hi there from history
-//     </div>
-// }
-
 import React, { useEffect, useState } from 'react';
+import { Transaction } from '../assets/Transaction';
 
 export const History = () => {
-    // State to store transactions
     const [transactions, setTransactions] = useState([]);
 
-    // useEffect(() => {
-    //     // Fetch transactions on component mount
-    //     const fetchTransactions = async () => {
-    //         const userId = localStorage.getItem("userId"); // Assuming you store userId in localStorage
-    //         const token = localStorage.getItem("token"); // Assuming the token is stored in localStorage after login
-
-    //         try {
-    //             const response = await fetch(`http://localhost:3000/api/v1/user/history?userId=${userId}`, {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Content-Type': 'application/json',
-    //                     // Include the token in the Authorization header
-    //                     'Authorization': `Bearer ${token}`,
-    //                 },
-    //             });
-
-    //             if (!response.ok) {
-    //                 throw new Error('Failed to fetch transactions');
-    //             }
-
-    //             const data = await response.json();
-    //             setTransactions(data); // Set the fetched transactions to state
-    //         } catch (error) {
-    //             console.error("Error fetching transaction history:", error);
-    //         }
-    //     };
-
-    //     fetchTransactions();
-    // }, []); 
-    // useEffect(() => {
-    //     const fetchTransactions = async () => {
-    //         const token = localStorage.getItem("token");
-    //         try {
-    //             const response = await fetch('http://localhost:3000/api/v1/user/history', {
-    //                 method: 'GET',
-    //                 headers: {
-    //                     'Authorization': `Bearer ${token}`,
-    //                 },
-    //             });
-    
-    //             if (!response.ok) {
-    //                 throw new Error('Failed to fetch transaction history');
-    //             }
-    
-    //             const transactions = await response.json();
-    //             console.log(transactions); // Or set the state to render transactions
-    //         } catch (error) {
-    //             console.error("Error:", error);
-    //         }
-    //     };
-    
-    //     fetchTransactions();
-    // }, []);
-    
     useEffect(() => {
         const fetchTransactions = async () => {
             const token = localStorage.getItem("token");
@@ -74,38 +14,53 @@ export const History = () => {
                         'Authorization': `Bearer ${token}`,
                     },
                 });
-    
+
                 if (!response.ok) {
                     throw new Error('Failed to fetch transaction history');
                 }
-    
-                // Assuming the response directly contains an array of transactions
+
                 const transactionsData = await response.json();
-                setTransactions(transactionsData); // Update the state with the fetched transactions
+                setTransactions(transactionsData);
             } catch (error) {
                 console.error("Error:", error);
             }
         };
-    
+
         fetchTransactions();
     }, []);
-    
-    
 
     return (
-        <div>
-            <h2>Transaction History</h2>
-            {transactions.length > 0 ? (
-                <ul>
-                    {transactions.map((transaction) => (
-                        <li key={transaction._id}>
-                            Amount: {transaction.amount}, Type: {transaction.type}, Date: {new Date(transaction.timestamp).toLocaleDateString()}
-                        </li>
-                    ))}
-                </ul>
-            ) : (
-                <p>No transactions found.</p>
-            )}
+        <div className="bg-gradient-to-r from-black via-gray-800 to-black text-white min-h-screen flex items-center justify-center">
+            <div className="w-full max-w-4xl">
+                <div className="flex items-center justify-center mb-6">
+                    <Transaction className="mr-2 h-6 w-6" /> {/* Adjust size as needed */}
+                    <h2 className="text-3xl font-extrabold">Transaction History</h2>
+                </div>
+                {transactions.length > 0 ? (
+                    <div className="overflow-x-auto">
+                        <table className="table-auto w-full text-center">
+                            <thead>
+                                <tr className="text-white">
+                                    <th className="px-4 py-2">Amount</th>
+                                    <th className="px-4 py-2">Type</th>
+                                    <th className="px-4 py-2">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {transactions.map((transaction, index) => (
+                                    <tr key={transaction._id} className={`${index % 2 === 0 ? 'bg-gray-700' : 'bg-gray-800'}`}>
+                                        <td className="border px-4 py-2">{transaction.amount}</td>
+                                        <td className="border px-4 py-2">{transaction.type}</td>
+                                        <td className="border px-4 py-2">{new Date(transaction.timestamp).toLocaleDateString()}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                ) : (
+                    <p className="text-center">No transactions found.</p>
+                )}
+            </div>
         </div>
     );
 };
