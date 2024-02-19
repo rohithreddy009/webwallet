@@ -14,7 +14,7 @@ export const SendMoney = () => {
     setIsLoading(true); // Start loading
     try {
       const response = await axios.post(
-        'http://localhost:3000/api/v1/account/transfer',
+        'https://wallet-archived-backend.vercel.app/api/v1/account/transfer',
         { to: id, amount },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );

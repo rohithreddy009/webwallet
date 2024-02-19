@@ -68,7 +68,7 @@ export const History = () => {
         const fetchTransactions = async () => {
             const token = localStorage.getItem("token");
             try {
-                const response = await fetch('http://localhost:3000/api/v1/user/history', {
+                const response = await fetch('https://wallet-archived-backend.vercel.app/api/v1/user/history', {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
