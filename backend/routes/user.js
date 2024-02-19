@@ -1,9 +1,8 @@
-// backend/routes/user.js
 const express = require('express');
 
 const router = express.Router();
 const zod = require("zod");
-const { User, Account } = require("../db");
+const { User, Account, Transaction } = require("../db");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = require("../config");
 const  { authMiddleware } = require("../middleware");
@@ -139,5 +138,50 @@ router.get("/bulk", async (req, res) => {
         }))
     })
 })
+
+// router.get('/history', async (req, res) => {
+//     const { userId } = req.query; // Or req.params if you're using URL parameters
+
+//     if (!userId) {
+//         return res.status(400).json({ message: 'User ID is required' });
+//     }
+
+//     try {
+//         // Check if user exists
+//         const userExists = await User.findById(userId);
+//         if (!userExists) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
+
+//         // Find transactions related to the user
+//         const transactions = await Transaction.find({ userId }).sort({ timestamp: -1 });
+//         res.json(transactions);
+//     } catch (error) {
+//         console.error('Error fetching transaction history:', error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// });
+
+router.get('/history', authMiddleware, async (req, res) => {
+    // Assuming authMiddleware adds the user ID to req after validating the token
+    const userId = req.userId;
+
+    try {
+        // Check if user exists
+        const userExists = await User.findById(userId);
+        if (!userExists) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Find transactions related to the user
+        const transactions = await Transaction.find({ userId }).sort({ timestamp: -1 });
+        res.json(transactions);
+    } catch (error) {
+        console.error('Error fetching transaction history:', error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+
 
 module.exports = router;

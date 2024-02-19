@@ -4,6 +4,7 @@ import { Signin } from "./pages/Signin";
 import { Dashboard } from "./pages/Dashboard";
 import { SendMoney } from "./pages/SendMoney";
 import { Landing } from "./pages/Landing";
+import { History } from "./pages/History"
 import { ProtectedRoute } from "./components/ProtectedRoute"; 
 import { PublicOnlyRoute } from "./components/PublicOnlyRoute"; 
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signin" element={<PublicOnlyRoute><Signin /></PublicOnlyRoute>} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/send" element={<ProtectedRoute><SendMoney /></ProtectedRoute>} />
+        <Route path="/history" element={<ProtectedRoute><History /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );
