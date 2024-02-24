@@ -6,7 +6,7 @@ export const Landing = () => {
     return (
         <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900">
             <h1 className="text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">Welcome to Web2 Wallet</h1>
-            <h3 className="text-3xl font-normal mb-4 text-white">A secure Digital Wallet to transfer and receive money to/from users</h3>
+            <h3 className="text-3xl font-normal mb-4 text-white">A secure Digital Wallet to transfer and receive money between users</h3>
             <button
                 onClick={() => navigate("/signup")}
                 className="text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition duration-150 ease-in-out"
