@@ -21,7 +21,7 @@ export const Appbar = () => {
         <div className="shadow h-14 flex justify-between items-center px-4 bg-black">
             <div className="text-white border border-white p-2 m-2 flex items-center">
                 <Wallet className="w-6 h-6 mr-2" />
-                <span className="hidden sm:inline">Web2 Wallet</span>
+                <span className="hidden sm:inline">Web Wallet</span>
             </div>
 
             <div className="flex items-center">
