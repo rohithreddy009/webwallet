@@ -6,6 +6,7 @@ import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URI } from "../config";
 
 export const Signup = () => {
     const [firstName, setFirstName] = useState("");
@@ -18,7 +19,7 @@ export const Signup = () => {
     const handleSignup = async () => {
         setLoading(true); // Start loading
         try {
-            const response = await axios.post("https://wallet-archived-backend.vercel.app/api/v1/user/signup", {
+            const response = await axios.post(`${BACKEND_URI}/api/v1/user/signup`, {
                 username,
                 firstName,
                 lastName,

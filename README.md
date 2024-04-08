@@ -1,7 +1,7 @@
 Web2 Wallet
 
 -  Money transfer app between users. 
-- Signup  [here](https://web2wallet-archived.rohithreddy.site/signup)
+- Signup  [here](https://web2wallet.rohithreddy.site)
 
 
 

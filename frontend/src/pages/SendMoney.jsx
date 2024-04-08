@@ -1,6 +1,7 @@
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import axios from 'axios';
+import { BACKEND_URI } from '../config';
 
 export const SendMoney = () => {
   const [searchParams] = useSearchParams();
@@ -14,7 +15,7 @@ export const SendMoney = () => {
     setIsLoading(true); // Start loading
     try {
       const response = await axios.post(
-        'https://wallet-archived-backend.vercel.app/api/v1/account/transfer',
+        `${BACKEND_URI}/api/v1/account/transfer`,
         { to: id, amount },
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       );

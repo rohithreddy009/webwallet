@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Appbar } from "../components/Appbar";
 import { Balance } from "../components/Balance";
 import { Users } from "../components/Users";
+import { BACKEND_URI } from '../config';
 
 export const Dashboard = () => {
     const [balance, setBalance] = useState("Loading...");
@@ -15,7 +16,7 @@ export const Dashboard = () => {
                     console.log('No token found, please log in');
                     return;
                 }
-                const response = await axios.get('https://wallet-archived-backend.vercel.app/api/v1/account/balance', { 
+                const response = await axios.get(`${BACKEND_URI}/api/v1/account/balance`, { 
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }

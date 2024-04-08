@@ -3,6 +3,8 @@ import { LogoutIcon } from "../assets/LogoutIcon";
 import { History } from "../assets/History";
 import { Wallet } from "../assets/Wallet";
 
+
+
 export const Appbar = () => {
     const navigate = useNavigate();
     const userName = localStorage.getItem("name") || "User";

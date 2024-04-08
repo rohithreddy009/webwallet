@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { InputBox } from "../components/InputBox";
 import { SubHeading } from "../components/SubHeading";
 import { Button } from "../components/Button";
 import { Heading } from "../components/Heading";
 import { BottomWarning } from "../components/BottomWarning";
+import { BACKEND_URI } from "../config";
 
 export const Signin = () => {
     const [username, setUsername] = useState("");
@@ -19,7 +19,7 @@ export const Signin = () => {
         setIsLoading(true); // Start loading
         setError(""); // Reset error message
         try {
-            const response = await axios.post("https://wallet-archived-backend.vercel.app/api/v1/user/signin", {
+            const response = await axios.post(`${BACKEND_URI}/api/v1/user/signin`, {
                 username,
                 password
             });

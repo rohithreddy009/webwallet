@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Transaction } from '../assets/Transaction';
+import { BACKEND_URI } from '../config';
 
 export const History = () => {
     const [transactions, setTransactions] = useState([]);
@@ -8,7 +9,7 @@ export const History = () => {
         const fetchTransactions = async () => {
             const token = localStorage.getItem("token");
             try {
-                const response = await fetch('https://wallet-archived-backend.vercel.app/api/v1/user/history', {
+                const response = await fetch(`${BACKEND_URI}/api/v1/user/history`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
