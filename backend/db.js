@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_URI)
 
-// Create a Schema for Users
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
