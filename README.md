@@ -1,7 +1,7 @@
 Web2 Wallet
 
 -  Money transfer app between users. 
-- Signup  [here](https://web2wallet.rohithreddy.site)
+- Signup  [here](https://web2-wallet.rohithreddy.site)
 
 
 
@@ -10,6 +10,8 @@ Web2 Wallet
 **Client:** React, TailwindCSS
 
 **Server:** Node, Express
+
+**Database:** MongoDB
 
 
 ## License
