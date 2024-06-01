@@ -1,26 +1,8 @@
-Web2 Wallet
+## <a name="tech-stack">⚙️ Tech Stack</a>
 
--  Money transfer app between users. 
-- Signup  [here](https://web2-wallet.rohithreddy.site)
+- React
+- MongoDB
+- Express
+- Tailwind 
 
-
-
-## Tech Stack
-
-**Client:** React, TailwindCSS
-
-**Server:** Node, Express
-
-**Database:** MongoDB
-
-
-## License
-
-[ISC](https://choosealicense.com/licenses/isc/)
-
-
-
-## Authors
-
-- [@rohtihreddy](https://www.github.com/rohithreddy009)
 

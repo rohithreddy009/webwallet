@@ -13,11 +13,11 @@ export const Signup = () => {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false); // State to manage loading condition
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSignup = async () => {
-        setLoading(true); // Start loading
+        setLoading(true);
         try {
             const response = await axios.post(`${BACKEND_URI}/api/v1/user/signup`, {
                 username,
@@ -31,24 +31,59 @@ export const Signup = () => {
             alert("Signup failed. Please try again.");
             console.error("Signup error:", error);
         } finally {
-            setLoading(false); // Stop loading regardless of the outcome
+            setLoading(false);
         }
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-gradient-to-r from-black via-gray-800 to-black">
-            <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 h-4/5 bg-white rounded-lg shadow-xl flex flex-col justify-center items-center overflow-auto">
-                <Heading label={"Sign up"} />
-                <SubHeading label={"Enter your details to create an account"} />
-                <div className="w-4/5 space-y-4">
-                    <InputBox onChange={e => setFirstName(e.target.value)} placeholder="John" label={"First Name"} />
-                    <InputBox onChange={e => setLastName(e.target.value)} placeholder="Doe" label={"Last Name"} />
-                    <InputBox onChange={e => setUsername(e.target.value)} placeholder="johndoe@gmail.com" label={"Email"} />
-                    <InputBox onChange={e => setPassword(e.target.value)} placeholder="*********" label={"Password"} type="password" />
-                    <div className="pt-4 w-full flex justify-center">
-                        <Button onClick={handleSignup} label={loading ? "Signing up..." : "Sign up"} disabled={loading} className="w-full" />
+        <div className="flex items-center justify-center h-screen bg-gradient-to-r from-gray-900 via-gray-800 to-black">
+            <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2 xl:w-1/3 h-auto bg-white rounded-lg shadow-xl p-8">
+                <div className="flex flex-col items-center">
+                    <Heading label={"Sign up"} className="mb-4 text-2xl font-bold" />
+                    <SubHeading label={"Enter your details to create an account"} className="mb-6 text-gray-600" />
+                    <div className="w-full space-y-4">
+                        <InputBox 
+                            value={firstName} 
+                            onChange={e => setFirstName(e.target.value)} 
+                            placeholder="John" 
+                            label={"First Name"} 
+                            className="w-full"
+                        />
+                        <InputBox 
+                            value={lastName} 
+                            onChange={e => setLastName(e.target.value)} 
+                            placeholder="Doe" 
+                            label={"Last Name"} 
+                            className="w-full"
+                        />
+                        <InputBox 
+                            value={username} 
+                            onChange={e => setUsername(e.target.value)} 
+                            placeholder="johndoe@gmail.com" 
+                            label={"Email"} 
+                            className="w-full"
+                        />
+                        <InputBox 
+                            value={password} 
+                            onChange={e => setPassword(e.target.value)} 
+                            placeholder="*********" 
+                            label={"Password"} 
+                            type="password" 
+                            className="w-full"
+                        />
+                        <Button 
+                            onClick={handleSignup} 
+                            label={loading ? "Signing up..." : "Sign up"} 
+                            disabled={loading} 
+                            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg mt-4" 
+                        />
                     </div>
-                    <BottomWarning label={"Already have an account?"} buttonText={"Sign in"} to={"/signin"} />
+                    <BottomWarning 
+                        label={"Already have an account?"} 
+                        buttonText={"Sign in"} 
+                        to={"/signin"} 
+                        className="mt-6"
+                    />
                 </div>
             </div>
         </div>
