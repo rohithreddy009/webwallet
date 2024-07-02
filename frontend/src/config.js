@@ -1,1 +1,1 @@
-export const BACKEND_URI = "http://walletbackend.rohithreddy.site"
+export const BACKEND_URI = "https://walletbackend.rohithreddy.site"
