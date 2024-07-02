@@ -36,6 +36,27 @@ export const Signin = () => {
         }
     };
 
+    const handleDemoLogin = async () => {
+        setIsLoading(true);
+        setError("");
+        try {
+            const response = await axios.post(`${BACKEND_URI}/api/v1/user/signin`, {
+                username: "demo_user@demomail.com",
+                password: "fake-password"
+            });
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("name", "demo_user");
+            navigate("/dashboard");
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                setError("Invalid credentials. Please try again.");
+            } else {
+                setError("You've entered invalid email or password, Try again !");
+            }
+            setIsLoading(false);
+        }
+    };
+
     if (isLoading) {
         return <div className="flex items-center justify-center h-screen text-white">Loading...</div>;
     }
@@ -64,6 +85,7 @@ export const Signin = () => {
                             className="w-full"
                         />
                         <Button onClick={handleSignin} label={"Sign in"} className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg" />
+                        <Button onClick={handleDemoLogin} label={"Login with Demo ID"} className="w-full bg-gray-600 hover:bg-gray-700 text-white py-2 px-4 rounded-lg" />
                     </div>
                     <BottomWarning label={"Don't have an account?"} buttonText={"Sign up"} to={"/signup"} className="mt-6" />
                 </div>

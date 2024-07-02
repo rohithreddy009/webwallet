@@ -8,7 +8,7 @@ export const Landing = () => {
             <h1 className="text-6xl font-bold mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">Welcome to Web Wallet</h1>
             <h3 className="text-3xl font-normal mb-4 text-white">A secure Digital Wallet to transfer and receive money between users</h3>
             <button
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/signin")}
                 className="text-lg bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-full transition duration-150 ease-in-out"
             >
                 Get Started Today
