@@ -1,6 +1,6 @@
 export const useAuth = () => {
-    const userToken = localStorage.getItem("token");
+    const userToken = localStorage.getItem('token')
     return {
-        isLoggedIn: !!userToken // Convert to boolean: true if token exists, false otherwise
-    };
-};
+        isLoggedIn: !!userToken, // Convert to boolean: true if token exists, false otherwise
+    }
+}

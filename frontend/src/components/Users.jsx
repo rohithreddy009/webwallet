@@ -1,22 +1,25 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { BACKEND_URI } from "../config";
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+import { BACKEND_URI } from '../config'
 
 export const Users = () => {
-    const [users, setUsers] = useState([]);
-    const [filter, setFilter] = useState("");
+    const [users, setUsers] = useState([])
+    const [filter, setFilter] = useState('')
 
     useEffect(() => {
-        axios.get(`${BACKEND_URI}/api/v1/user/bulk?filter=${filter}`)
-            .then(response => {
-                setUsers(response.data.user); // Ensure this matches your API response structure
-            });
-    }, [filter]);
+        axios
+            .get(`${BACKEND_URI}/api/v1/user/bulk?filter=${filter}`)
+            .then((response) => {
+                setUsers(response.data.user) 
+            })
+    }, [filter])
 
     return (
         <>
-            <div className="font-bold mt-6 text-lg text-white">Web2Wallet Users</div>
+            <div className="font-bold mt-6 text-lg text-white">
+                Web2Wallet Users
+            </div>
             <div className="my-2">
                 <input
                     onChange={(e) => setFilter(e.target.value)}
@@ -26,14 +29,16 @@ export const Users = () => {
                 />
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {users.map(user => <UserCard user={user} key={user._id} />)}
+                {users.map((user) => (
+                    <UserCard user={user} key={user._id} />
+                ))}
             </div>
         </>
-    );
+    )
 }
 
 function UserCard({ user }) {
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
     return (
         <div className="bg-white text-black rounded-lg p-4 shadow-lg flex items-center justify-between">
@@ -42,15 +47,22 @@ function UserCard({ user }) {
                     {user.firstName[0]}
                 </div>
                 <div className="flex flex-col">
-                    <span className="font-bold">{user.firstName} {user.lastName}</span>
+                    <span className="font-bold">
+                        {user.firstName} {user.lastName}
+                    </span>
                 </div>
             </div>
-            <div className="flex-shrink-0 ml-4"> {/* Added margin-left for spacing */}
+            <div className="flex-shrink-0 ml-4">
+                {' '}
+                {/* Added margin-left for spacing */}
                 <button
-                    onClick={() => navigate(`/send?id=${user._id}&name=${user.firstName}`)}
+                    onClick={() =>
+                        navigate(`/send?id=${user._id}&name=${user.firstName}`)
+                    }
                     className="text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                     style={{
-                        background: 'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(67,67,67,1) 100%)',
+                        background:
+                            'linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(67,67,67,1) 100%)',
                         whiteSpace: 'nowrap',
                         maxWidth: '150px', // Set a max-width to control button size
                     }}
@@ -59,5 +71,5 @@ function UserCard({ user }) {
                 </button>
             </div>
         </div>
-    );
+    )
 }
